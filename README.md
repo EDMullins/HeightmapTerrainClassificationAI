@@ -44,6 +44,12 @@ TODO: Add image: Elevation, Slope, Aspect
 
 ## 2.2. Rule-Based Labels  
 
+A deterministic classifier `classify_pixel()` assigns each pixel to one of sixteen land-use categories based on:  
+* **Elevation zone:** Low, Mid, High
+* **Aspect Category:** North, North-East, East, etc
+* **Slope range** (ex. 0.18)  
+These rules mimic ecological/agricultural reasoning, such as placing wetlands in low-flat zones or orchards on mid-slope north/south aspects. Based on these terrain attributes, the function assigns one of **16 agricultural land-use classes** (`pond_wetland`, `forest`, `unsuitable`, etc.) The helper `process_heightmap_labels()` applies this rule system over all pixels in the heightmap and constructs a **256 × 256 integer label map**, where each class corresponds to an index defined in label_to_idx
+
 # 3. Dataset
 
 # 4. Results
