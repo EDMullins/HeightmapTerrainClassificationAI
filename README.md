@@ -50,6 +50,17 @@ A deterministic classifier `classify_pixel()` assigns each pixel to one of sixte
 * **Slope range** (ex. 0.18)  
 These rules mimic ecological/agricultural reasoning, such as placing wetlands in low-flat zones or orchards on mid-slope north/south aspects. Based on these terrain attributes, the function assigns one of **16 agricultural land-use classes** (`pond_wetland`, `forest`, `unsuitable`, etc.) The helper `process_heightmap_labels()` applies this rule system over all pixels in the heightmap and constructs a **256 × 256 integer label map**, where each class corresponds to an index defined in label_to_idx
 
+## 2.3. Dataset Construction
+
+The TerrainDataset class integrates the feature and label generation processes to produce training-ready samples:  
+* The constructor loads all .png heightmaps from a directory.
+* __getitem__(): + Generates the 4-channel feature tensor using process_heightmap_features().
+    - Computes the corresponding label mask using process_heightmap_labels().
+    - Converts both arrays into PyTorch tensors.
+Each sample returned has the form:
+image_tensor: torch.float32 shape (4, 256, 256)
+label_tensor: torch.long shape (256, 256)
+This structured dataset is then fed into a DataLoader for batching, shuffling, and iteration during training.
 # 3. Dataset
 
 # 4. Results
