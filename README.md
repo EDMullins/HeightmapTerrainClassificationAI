@@ -1,7 +1,6 @@
 # Heightmap Terrain Classification AI
 
 Author: Ethan Mullins  
-Class: UNA CS 470
 
 ---
 # Abstract
